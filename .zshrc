@@ -1,0 +1,44 @@
+PATH=$PATH:~/homebrew/sbin:~/homebrew/bin
+
+# Added by GDK bootstrap
+# source /Users/macdoos/.asdf/asdf.shA
+
+export PATH=$PATH:~/.yarn/bin
+eval "$(starship init zsh)"
+
+# History control
+HISTCONTROL=ignoredups:ignorespace
+HISTSIZE=100000
+HISTFILESIZE=2000000
+
+
+alias l='ls -l'
+alias ll="ls -al"
+alias mkdir="mkdir -p"
+alias plz='sudo'
+alias grep='grep --color=auto'
+alias :q='exit'
+alias docs="cd ~/Documents"
+alias pysrv="python3 -m http.server"
+alias downs="cd ~/Downloads/"
+alias pbpatch="pbpaste | patch -p1"
+alias startkali='VBoxManage startvm --type headless "kali"'
+alias kaliproxy='ssh -D 9090 -N -f kali'
+alias proxy='"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --user-data-dir="$HOME/proxy-profile" --proxy-server="socks5://localhost:9090"'
+alias stopkali="VBoxManage controlvm kali poweroff"
+alias gcd="git checkout develop"
+alias ga="git add ."
+alias gp="git push"
+alias gpf="git push -f"
+alias gl="git checkout -"
+alias lint="git diff-index --name-only --diff-filter=AM develop | grep -E '\.js$' | xargs yarn run eslint-f
+eslint=$?"
+alias rubocop="git diff-index --name-only --diff-filter=AM develop | grep -E '\.rb$' | grep -v 'db/schema.rb' | xargs bundle exec rubocop -A
+rubocop=$?"
+alias prettier="yarn prettier --write"
+
+fml() {
+  echo `2>/dev/null ps aux | grep -v "grep" | grep -E "(sidekiq|redis-server|postgres|mailcatcher|unicorn)" | awk '{ print $2; }' | grep -Eo '[0-9]+'`
+}
+
+eval "$(starship init zsh)"

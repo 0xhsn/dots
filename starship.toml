@@ -1,0 +1,53 @@
+# Inserts a blank line between shell prompts
+add_newline = false 
+
+[character]
+disabled = true 
+
+[username]
+disabled = false
+format = "🍣 "
+show_always = true
+
+[hostname]
+disabled = false
+format = ""
+ssh_only = false
+
+[directory]
+style = "bold white"
+truncate_to_repo = false
+truncation_length	= 8
+
+[docker_context]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[ruby]
+disabled = true
+
+[git_branch]
+symbol = ""
+style = "147"
+
+[cmd_duration]
+disabled = true
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[status]
+disabled = true
+
+[battery]
+disabled = true
+
+[git_status]
+style = "121"
+
+[gcloud]
+format = '[$symbol]($style)'
+

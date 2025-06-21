@@ -12,7 +12,7 @@ Bootstrap with `brew` or the `install.sh` script, setup with `chezmoi`
 brew install chezmoi
 
 # init
-chezmoi init rubyroobs/dots
+chezmoi init 0xhsn/dots
 
 # change shell to zsh if not already default
 chsh -s $(which zsh)

@@ -1,0 +1,19 @@
+[user]
+	name = {{ .name | quote }}
+	email = {{ .email | quote }}
+	signingkey = {{ .signingkey | quote }}
+[commit]
+	gpgsign = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[alias]
+    st = status
+    co = checkout
+    ci = commit
+    last = log -1 HEAD
+    unstage = reset HEAD --
+    gl = checkout - 

@@ -1,13 +1,12 @@
 # Inserts a blank line between shell prompts
-add_newline = false 
+add_newline = false
 
 [character]
-disabled = true 
+disabled = true
 
 [username]
 disabled = false
 format = "🍣 "
-# format = "[いつか火影になります](bold #f5676d)🍵 "
 show_always = true
 
 [hostname]

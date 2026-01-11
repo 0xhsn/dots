@@ -2,8 +2,17 @@
 	name = {{ .name | quote }}
 	email = {{ .email | quote }}
 	signingkey = {{ .signingkey | quote }}
+
 [commit]
 	gpgsign = true
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	allowedSignersFile = ~/.config/git/allowed_signers
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -11,9 +20,11 @@
 	required = true
 
 [alias]
-    st = status
-    co = checkout
-    ci = commit
-    last = log -1 HEAD
-    unstage = reset HEAD --
-    gl = checkout - 
+	st = status
+	co = checkout
+	ci = commit
+	last = log -1 HEAD
+	unstage = reset HEAD --
+
+[credential]
+	helper = osxkeychain

@@ -10,7 +10,11 @@
 	format = ssh
 
 [gpg "ssh"]
+{{ if eq .chezmoi.os "darwin" -}}
 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+{{ else -}}
+	program = /opt/1Password/op-ssh-sign
+{{ end -}}
 	allowedSignersFile = ~/.config/git/allowed_signers
 
 [filter "lfs"]
@@ -26,5 +30,10 @@
 	last = log -1 HEAD
 	unstage = reset HEAD --
 
-[credential]
-	helper = osxkeychain
+[credential "https://github.com"]
+	helper =
+	helper = !/usr/bin/env gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/usr/bin/env gh auth git-credential

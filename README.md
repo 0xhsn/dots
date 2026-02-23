@@ -2,82 +2,67 @@
 
 > Give me six hours to chop down a tree, and I will spend the first four sharpening the axe.
 
-## Installation
-
-Bootstrap with `brew` or the `install.sh` script, setup with `chezmoi`
+## Quick start
 
 ```shell
-# macOS specific
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+git clone https://github.com/0xhsn/dots.git
+cd dots && ./scripts/setup.sh
+```
+
+Or manually:
+
+```shell
+# macOS
 brew install chezmoi
+chezmoi init 0xhsn/dots --apply
 
-# init
-chezmoi init 0xhsn/dots
-
-# change shell to zsh if not already default
-chsh -s $(which zsh)
+# Ubuntu
+sh -c "$(curl -fsLS get.chezmoi.io)"
+chezmoi init 0xhsn/dots --apply
 ```
 
 ## Components
 
-- `.tmux.conf`: Terminal multiplexer configuration
-- `.vimrc` & `.vim/`: Vim editor configuration and plugins
-- `.zshrc`: Zsh shell configuration
-- `git/config`: Git configuration with aliases and signing setup
-- `starship.toml`: Cross-shell prompt configuration
-- `.ssh/`: SSH configuration with 1Password integration
-  - Uses 1Password SSH agent for key management
-  - Includes connection keepalive settings
-  - OrbStack integration for container/VM access
+- `.zshrc` — shell config, aliases, mise, starship
+- `.tmux.conf` — backtick prefix, Catppuccin theme
+- `.vimrc` & `.vim/` — Vim with photon colorscheme
+- `nvim/init.lua` — Neovim with lazy.nvim + Catppuccin
+- `zed/settings.json` — Zed editor config
+- `git/config` — Git aliases, SSH signing via 1Password
+- `starship.toml` — cross-shell prompt
+- `.ssh/config` — SSH with 1Password agent (macOS), keepalive
 
 ## Structure
 
-The repository follows chezmoi's conventions:
-
 ```
 home/
-├── dot_tmux.conf              # → ~/.tmux.conf
-├── dot_vim/                  # → ~/.vim/
-├── dot_vimrc                # → ~/.vimrc
-├── dot_zshrc                # → ~/.zshrc
-├── dot_ssh/                 # → ~/.ssh/
-│   └── config              # → ~/.ssh/config
+├── .chezmoi.toml.tmpl          → ~/.config/chezmoi/chezmoi.toml
+├── dot_tmux.conf               → ~/.tmux.conf
+├── dot_vim/                    → ~/.vim/
+├── dot_vimrc                   → ~/.vimrc
+├── dot_zshrc                   → ~/.zshrc
+├── private_dot_ssh/
+│   └── config.tmpl             → ~/.ssh/config
 └── private_dot_config/
-    ├── git/
-    │   └── config          # → ~/.config/git/config
-    └── starship.toml      # → ~/.config/starship.toml
+    ├── git/config              → ~/.config/git/config
+    ├── nvim/init.lua           → ~/.config/nvim/init.lua
+    ├── starship.toml           → ~/.config/starship.toml
+    └── zed/settings.json       → ~/.config/zed/settings.json
+scripts/
+└── setup.sh                    — bootstrap for macOS & Ubuntu
+Brewfile                        — macOS packages
 ```
 
-## Post-installation
+## Cross-platform
 
-After installation, you may want to:
-
-1. Install Vim plugins (if any are configured)
-2. Install Tmux plugin manager (if using plugins)
-3. Install Starship prompt if not already installed:
-   ```shell
-   curl -sS https://starship.rs/install.sh | sh
-   ```
-4. Set up GPG for Git commit signing:
-   ```shell
-   # Import your GPG key if needed
-   gpg --import your-key.asc
-   ```
-5. Configure 1Password SSH agent:
-   - Enable SSH agent in 1Password settings
-   - Add your SSH keys to 1Password
-   - They will be automatically available through the SSH agent
+Chezmoi templates handle OS differences:
+- **macOS** — 1Password SSH agent, `op-ssh-sign` for git, OrbStack, Homebrew
+- **Ubuntu** — WhiteSur cursors, standard ssh-agent, mise via curl
 
 ## Maintenance
 
-To update your dotfiles:
-
 ```shell
-chezmoi update
-```
-
-To add new dotfiles:
-
-```shell
-chezmoi add ~/.file
+chezmoi update          # pull & apply latest
+chezmoi re-add          # sync local changes back to repo
+chezmoi diff            # see what would change
 ```

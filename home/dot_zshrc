@@ -8,7 +8,6 @@ HISTCONTROL=ignoredups:ignorespace
 HISTSIZE=100000
 HISTFILESIZE=2000000
 
-
 alias l='ls -l'
 alias ll="ls -al"
 alias mkdir="mkdir -p"
@@ -19,10 +18,8 @@ alias docs="cd ~/Documents"
 alias pysrv="python3 -m http.server"
 alias downs="cd ~/Downloads/"
 alias pbpatch="pbpaste | patch -p1"
-alias startkali='VBoxManage startvm --type headless "kali"'
-alias kaliproxy='ssh -D 9090 -N -f kali'
-alias proxy='"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --user-data-dir="$HOME/proxy-profile" --proxy-server="socks5://localhost:9090"'
-alias stopkali="VBoxManage controlvm kali poweroff"
+
+# Custom
 alias gcd="git checkout develop"
 alias ga="git add ."
 alias gp="git push"
@@ -38,38 +35,31 @@ fml() {
   echo `2>/dev/null ps aux | grep -v "grep" | grep -E "(sidekiq|redis-server|postgres|mailcatcher|unicorn)" | awk '{ print $2; }' | grep -Eo '[0-9]+'`
 }
 
+rdp() {
+  pkill -f "ssh.*L.*3390:" 2>/dev/null
+  ssh -f -N -L 3390:${1}:3389 k && echo "RDP ready on localhost:3390 → $1"
+}
 
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+# Tools
+eval "$(mise activate zsh)"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
-
-
-# Created by `pipx` on 2024-03-23 05:26:35
 export PATH="$PATH:$HOME/.local/bin"
-
 . "$HOME/.cargo/env"
 
-# bun completions
+# Bun
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-. ~/.bun/bin
 
+# OpenSSL
 export LDFLAGS="-L/usr/local/opt/openssl/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl/include"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
-
 export PATH="$(brew --prefix openssl)/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 
-
-# enabke terraform auto completion
-# terraform -install-autocomplete
-
-# autoload -U +X bashcompinit && bashcompinit
-# complete -o nospace -C /opt/homebrew/bin/terraform terraform
-
+# 1Password SSH agent
+{{ if eq .chezmoi.os "darwin" -}}
 export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-export KUBECONFIG=$HOME/homelab/.kube/config
+{{- end }}

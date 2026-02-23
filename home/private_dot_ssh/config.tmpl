@@ -14,3 +14,24 @@ Host *
     AddKeysToAgent yes
     HashKnownHosts yes
 {{- end }}
+
+Host esxi
+    HostName <esxi-ip>
+    User root
+
+Host k
+    HostName <kali-ip>
+    User <user>
+    DynamicForward 9090
+    LocalForward 3390 <rdp-target-ip>:3389
+    ForwardX11 yes
+    ForwardX11Trusted yes
+    XAuthLocation /opt/X11/bin/xauth
+
+Host wifilab
+    HostName <wifilab-ip>
+    User user
+
+Host sift
+    HostName <sift-ip>
+    User sansforensics

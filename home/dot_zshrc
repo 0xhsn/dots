@@ -63,3 +63,6 @@ export PATH="/opt/homebrew/bin:$PATH"
 {{ if eq .chezmoi.os "darwin" -}}
 export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 {{- end }}
+
+# 1Password CLI helpers
+[ -f "$HOME/.config/shell/op-functions.sh" ] && . "$HOME/.config/shell/op-functions.sh"

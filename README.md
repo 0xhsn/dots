@@ -44,8 +44,10 @@ home/
 ├── private_dot_ssh/
 │   └── config.tmpl             → ~/.ssh/config
 └── private_dot_config/
+    ├── gh/hosts.yml.tpl        — 1Password template for GitHub CLI
     ├── git/config              → ~/.config/git/config
     ├── nvim/init.lua           → ~/.config/nvim/init.lua
+    ├── shell/op-functions.sh   → ~/.config/shell/op-functions.sh
     ├── starship.toml           → ~/.config/starship.toml
     └── zed/settings.json       → ~/.config/zed/settings.json
 scripts/
@@ -58,6 +60,10 @@ Brewfile                        — macOS packages
 Chezmoi templates handle OS differences:
 - **macOS** — 1Password SSH agent, `op-ssh-sign` for git, OrbStack, Homebrew
 - **Ubuntu** — WhiteSur cursors, standard ssh-agent, mise via curl
+
+## Secrets & SSH keys
+
+See [docs/secrets.md](docs/secrets.md) for the full 1Password + YubiKey setup.
 
 ## Maintenance
 

@@ -18,6 +18,7 @@ alias docs="cd ~/Documents"
 alias pysrv="python3 -m http.server"
 alias downs="cd ~/Downloads/"
 alias pbpatch="pbpaste | patch -p1"
+alias worker='cmux ssh-tmux worker'
 
 # Custom
 alias gcd="git checkout develop"
